@@ -2,11 +2,14 @@ const express = require ('express')
 const  cors = require('cors')
 const mongoose =require('mongoose');
 require('dotenv').config()
-
+const taskRoutes = require('./routess/tasks')
 const app = express()
 
 app.use(cors());
 app.use(express.json())
+
+//routes
+app.use('/tasks',taskRoutes)
 
 
 //database connection
