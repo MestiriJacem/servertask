@@ -2,14 +2,21 @@ const express = require ('express')
 const  cors = require('cors')
 const mongoose =require('mongoose');
 require('dotenv').config()
-const taskRoutes = require('./routess/tasks')
+const taskRoutes = require('./routes/tasks')
+const authRoutes =require ("./routes/authRoutes")
 const app = express()
 
-app.use(cors());
+app.use(cors({
+    origin:"http://localhost:3000",//allow frontend
+    credentials:true,//allow cookies and auth headers
+    allowedHeaders:["Content-Type","Authorization"],
+    methods :["GET","POST","PUT","DELETE"]
+}))
 app.use(express.json())
 
 //routes
 app.use('/tasks',taskRoutes)
+app.use("/auth",authRoutes)
 
 
 //database connection
